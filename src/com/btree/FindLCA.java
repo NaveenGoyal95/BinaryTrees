@@ -24,13 +24,11 @@ public class FindLCA {
 		if (node.value == value1 || node.value == value2) {
 			return node;
 		}
-		if (node.left.value==value1||node.left.value==value2) {
-			return node;
-		}
+		
 		Node left = findLCA(value1, value2, node.left);
 		Node right = findLCA(value1, value2, node.right);
-		if (left == null && right == null) {
-			return null;
+		if (left != null && right != null) {
+			return node;
 		}
 		if (left == null)
 			return right;
