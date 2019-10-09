@@ -23,12 +23,13 @@ public class MaximumSumInTree {
 	}
 	
 	public static Integer maxPathSum(Node root) {
-		Integer max=Integer.MIN_VALUE;
-		 maxPathSum( root,max);
-		 return max;
+		Pair pair=new Pair(root, 0);
+		pair.level=Integer.MIN_VALUE;
+		 maxPathSum( root,pair);
+		 return pair.level;
 	}
 	
-	public static Integer maxPathSum(Node node,Integer max) {
+	public static Integer maxPathSum(Node node,Pair pair) {
 		if(node==null)
 			return 0;
 		
@@ -36,11 +37,11 @@ public class MaximumSumInTree {
 			return node.value;
 		}
 		
-		int leftSum=maxPathSum( node.left, max);
-		int rightSum=maxPathSum( node.right, max);
+		int leftSum=maxPathSum( node.left, pair);
+		int rightSum=maxPathSum( node.right,pair);
 		
 		if(node.left!=null && node.right !=null) {
-			max=Math.max(max, (leftSum+rightSum+node.value));
+			pair.level=Math.max(pair.level, (leftSum+rightSum+node.value));
 			return Math.max(leftSum, rightSum)+node.value;
 		}
 		
